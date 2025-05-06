@@ -13,7 +13,7 @@ class CandidateDetailSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('candidatedetails')->insert([
+        DB::table('candidate_details')->insert([
             [
                 'candidate_id' => 1,
                 'name' => 'Anies Baswedan',

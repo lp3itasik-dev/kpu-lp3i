@@ -15,6 +15,46 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('candidates.index')" :active="request()->routeIs([
+                        'candidates.index',
+                        'candidates.create',
+                        'candidates.edit',
+                        'candidates.show',
+                    ])">
+                        {{ __('Candidates') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('faculties.index')" :active="request()->routeIs([
+                        'faculties.index',
+                        'faculties.create',
+                        'faculties.edit',
+                        'faculties.show',
+                    ])">
+                        {{ __('Faculties') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('programs.index')" :active="request()->routeIs([
+                        'programs.index',
+                        'programs.create',
+                        'programs.edit',
+                        'programs.show',
+                    ])">
+                        {{ __('Programs') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('organizations.index')" :active="request()->routeIs([
+                        'organizations.index',
+                        'organizations.create',
+                        'organizations.edit',
+                        'organizations.show',
+                    ])">
+                        {{ __('Organizations') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs([
+                        'users.index',
+                        'users.create',
+                        'users.edit',
+                        'users.show',
+                    ])">
+                        {{ __('Users') }}
+                    </x-nav-link>
                 </div>
             </div>
 

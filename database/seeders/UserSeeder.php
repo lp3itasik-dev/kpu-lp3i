@@ -24,7 +24,13 @@ class UserSeeder extends Seeder
                 'name' => 'Muhammad Aripin, S.Kom',
                 'email' => 'aripin.lp3i@gmail.com',
                 'password' => bcrypt('12345678'),
-                'role' => 'S',
+                'role' => 'O',
+                'is_active' => true,
+            ],[
+                'name' => 'Asep Manarul Hidayah, S.Kom',
+                'email' => 'asep.lp3i@gmail.com',
+                'password' => bcrypt('12345678'),
+                'role' => 'U',
                 'is_active' => true,
             ],
         ]);
