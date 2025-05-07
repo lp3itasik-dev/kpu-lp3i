@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organization;
+use App\Models\Program;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
@@ -12,7 +13,7 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        $organizations = Organization::all();
+        $organizations = Organization::with('program')->get();
         return view('organizations.index')->with([
             'organizations' => $organizations,
         ]);
@@ -23,7 +24,10 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-        //
+        $programs = Program::all();
+        return view('organizations.create')->with([
+            'programs' => $programs,
+        ]);
     }
 
     /**
@@ -31,7 +35,23 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'program_id' => 'required|exists:programs,id',
+            'name' => 'required|string|max:255',
+            'logo' => 'required|string|max:255',
+            'description' => 'required|string',
+            'is_active' => 'required|boolean'
+        ]);
+
+        Organization::create([
+            'program_id' => $request->program_id,
+            'name' => $request->name,
+            'logo' => $request->logo,
+            'description' => $request->description,
+            'is_active' => $request->is_active
+        ]);
+
+        return redirect()->route('organizations.index')->with('success', 'Organization created successfully');
     }
 
     /**
@@ -47,7 +67,12 @@ class OrganizationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $programs = Program::all();
+        $organization = Organization::with('program')->findOrFail($id);
+        return view('organizations.edit')->with([
+            'organization' => $organization,
+            'programs' => $programs,
+        ]);
     }
 
     /**
@@ -55,7 +80,24 @@ class OrganizationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'program_id' => 'required|exists:programs,id',
+            'name' => 'required|string|max:255',
+            'logo' => 'required|string|max:255',
+            'description' => 'required|string',
+            'is_active' => 'required|boolean'
+        ]);
+
+        $organization = Organization::findOrFail($id);
+        $organization->update([
+            'program_id' => $request->program_id,
+            'name' => $request->name,
+            'logo' => $request->logo,
+            'description' => $request->description,
+            'is_active' => $request->is_active
+        ]);
+
+        return redirect()->route('organizations.index')->with('success', 'Organization updated successfully');
     }
 
     /**
@@ -63,6 +105,8 @@ class OrganizationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $organization = Organization::findOrFail($id);
+        $organization->delete();
+        return redirect()->route('organizations.index')->with('success', 'Organization deleted successfully.');
     }
 }

@@ -25,4 +25,12 @@ class Candidate extends Model
         'video',
         'is_active',
     ];
+
+    /**
+     * The organization that owns the candidate.
+     */
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
 }

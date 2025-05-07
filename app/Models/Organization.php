@@ -22,4 +22,20 @@ class Organization extends Model
         'description',
         'is_active'
     ];
+
+    /**
+     * The program that owns the organization.
+     */
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
+    }
+
+    /**
+     * The candidates that belong to the organization.
+     */
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class);
+    }
 }

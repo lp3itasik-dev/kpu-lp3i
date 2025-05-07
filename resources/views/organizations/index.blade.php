@@ -7,7 +7,43 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus vero enim dolorum a quisquam quasi quod repellat quas odit officia. Velit, assumenda? Modi culpa commodi sequi quod nihil aliquid quo debitis odit illum nesciunt eaque aut architecto blanditiis assumenda obcaecati placeat sint, corrupti tenetur minus. Aperiam incidunt eligendi repudiandae quae accusantium. Quisquam sunt dolore maiores expedita. Voluptatem cum nulla, suscipit ullam a dolor praesentium. Incidunt expedita ipsam sequi accusamus tempora praesentium veritatis doloribus placeat eum! Odit aspernatur animi expedita distinctio corrupti modi consequuntur temporibus sit tempore, enim fugit consequatur a fuga eveniet quasi, laborum beatae placeat velit error maxime possimus!</p>
+            <a href="{{ route('organizations.create') }}">Create</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Program</th>
+                        <th>Name</th>
+                        <th>Logo</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($organizations as $key => $organization)
+                    <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $organization->program->name ?? 'Unknown' }}</td>
+                        <td>{{ $organization->name }}</td>
+                        <td>{{ $organization->logo }}</td>
+                        <td>{{ $organization->description }}</td>
+                        <td>{{ $organization->is_active ? 'Active' : 'Non Active' }}</td>
+                        <td>
+                            <a href="{{ route('organizations.edit', $organization->id) }}">Edit</a>
+                            <form action="{{ route('organizations.destroy', $organization->id) }}" method="POST" class="inline" onclick="return confirm('Are you sure you want to delete this item?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Delete</button>
+                            </form>
+                    </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7">Not found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 </x-app-layout>

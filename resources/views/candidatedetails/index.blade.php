@@ -7,7 +7,40 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus vero enim dolorum a quisquam quasi quod repellat quas odit officia. Velit, assumenda? Modi culpa commodi sequi quod nihil aliquid quo debitis odit illum nesciunt eaque aut architecto blanditiis assumenda obcaecati placeat sint, corrupti tenetur minus. Aperiam incidunt eligendi repudiandae quae accusantium. Quisquam sunt dolore maiores expedita. Voluptatem cum nulla, suscipit ullam a dolor praesentium. Incidunt expedita ipsam sequi accusamus tempora praesentium veritatis doloribus placeat eum! Odit aspernatur animi expedita distinctio corrupti modi consequuntur temporibus sit tempore, enim fugit consequatur a fuga eveniet quasi, laborum beatae placeat velit error maxime possimus!</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Candidate</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($candidatedetails as $key => $candidate)
+                    <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $candidate->candidate_id }}</td>
+                        <td>{{ $candidate->name }}</td>
+                        <td>{{ $candidate->description }}</td>
+                        <td>{{ $candidate->is_active ? 'Active' : 'Non Active' }}</td>
+                        <td>
+                            <a href="{{ route('candidatedetails.edit', $candidate->id) }}">Edit</a>
+                            <form action="{{ route('candidatedetails.destroy', $candidate->id) }}" method="POST" class="inline" onclick="return confirm('Are you sure you want to delete this item?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Delete</button>
+                            </form>
+                    </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6">Not found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 </x-app-layout>

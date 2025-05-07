@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CandidateDetail;
 use Illuminate\Http\Request;
 
 class CandidateDetailController extends Controller
@@ -11,7 +12,10 @@ class CandidateDetailController extends Controller
      */
     public function index()
     {
-        //
+        $candidatedetails = CandidateDetail::all();
+        return view('candidatedetails.index')->with([
+            'candidatedetails' => $candidatedetails,
+        ]);
     }
 
     /**
@@ -59,6 +63,8 @@ class CandidateDetailController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $candidatedetail = CandidateDetail::findOrFail($id);
+        $candidatedetail->delete();
+        return redirect()->route('candidatedetails.index')->with('success', 'Candidate detail deleted successfully.');
     }
 }

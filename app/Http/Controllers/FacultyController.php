@@ -23,7 +23,7 @@ class FacultyController extends Controller
      */
     public function create()
     {
-        //
+        return view('faculties.create');
     }
 
     /**
@@ -31,7 +31,19 @@ class FacultyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'dean' => 'required|string|max:255',
+            'is_active' => 'required|boolean',
+        ]);
+
+        Faculty::create([
+            'name' => $request->name,
+            'dean' => $request->dean,
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('faculties.index')->with('success', 'Faculty created successfully.');
     }
 
     /**
@@ -47,7 +59,10 @@ class FacultyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $faculty = Faculty::findOrFail($id);
+        return view('faculties.edit')->with([
+            'faculty' => $faculty,
+        ]);
     }
 
     /**
@@ -55,7 +70,20 @@ class FacultyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'dean' => 'required|string|max:255',
+            'is_active' => 'required|boolean',
+        ]);
+
+        $faculty = Faculty::findOrFail($id);
+        $faculty->update([
+            'name' => $request->name,
+            'dean' => $request->dean,
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('faculties.index')->with('success', 'Faculty updated successfully.');
     }
 
     /**
@@ -63,6 +91,9 @@ class FacultyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $faculty = Faculty::findOrFail($id);
+        $faculty->delete();
+
+        return redirect()->route('faculties.index')->with('success', 'Faculty deleted successfully.');
     }
 }

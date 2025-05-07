@@ -21,4 +21,20 @@ class Program extends Model
         'head',
         'is_active'
     ];
+
+    /**
+     * The faculty that owns the program.
+     */
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
+
+    /**
+     * The courses that belong to the program.
+     */
+    public function organization()
+    {
+        return $this->hasMany(Organization::class);
+    }
 }

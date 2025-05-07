@@ -20,4 +20,12 @@ class Faculty extends Model
         'dean',
         'is_active',
     ];
+
+    /**
+     * The programs that belong to the faculty.
+     */
+    public function programs()
+    {
+        return $this->hasMany(Program::class);
+    }
 }
