@@ -15,6 +15,7 @@ class CandidateSeeder extends Seeder
     {
         DB::table('candidates')->insert([
             [
+                'period_id' => 1,
                 'organization_id' => 1,
                 'name' => 'AMIN',
                 'description' => 'AMIN adalah Anies Baswedan dan Muhaimin Iskandar',
@@ -24,6 +25,7 @@ class CandidateSeeder extends Seeder
                 'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
+                'period_id' => 1,
                 'organization_id' => 1,
                 'name' => 'PRAGIB',
                 'description' => 'PRAGIB adalah Prabowo Subianto dan Gibran Rakabuming Raka',
@@ -33,6 +35,7 @@ class CandidateSeeder extends Seeder
                 'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
+                'period_id' => 1,
                 'organization_id' => 1,
                 'name' => 'GANMAP',
                 'description' => 'GANMAP adalah Ganjar Pranowo dan Mahfud MD',

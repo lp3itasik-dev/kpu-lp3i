@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('cardvotes.index')" :active="request()->routeIs([
+                        'cardvotes.index',
+                        'cardvotes.create',
+                        'cardvotes.edit',
+                        'cardvotes.show',
+                    ])">
+                        {{ __('Card Votes') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('candidates.index')" :active="request()->routeIs([
                         'candidates.index',
                         'candidates.create',
@@ -22,6 +30,14 @@
                         'candidates.show',
                     ])">
                         {{ __('Candidates') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('periods.index')" :active="request()->routeIs([
+                        'periods.index',
+                        'periods.create',
+                        'periods.edit',
+                        'periods.show',
+                    ])">
+                        {{ __('Periods') }}
                     </x-nav-link>
                     <x-nav-link :href="route('faculties.index')" :active="request()->routeIs([
                         'faculties.index',

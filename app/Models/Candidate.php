@@ -16,6 +16,7 @@ class Candidate extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'period_id',
         'organization_id',
         'name',
         'description',
@@ -32,5 +33,10 @@ class Candidate extends Model
     public function organization()
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function period()
+    {
+        return $this->belongsTo(Period::class);
     }
 }

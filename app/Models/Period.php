@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Organization extends Model
+class Period extends Model
 {
-    /** @use HasFactory<\Database\Factories\OrganizationFactory> */
+    /** @use HasFactory<\Database\Factories\PeriodFactory> */
     use HasFactory;
 
     /**
@@ -16,23 +16,13 @@ class Organization extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'program_id',
         'name',
-        'logo',
         'description',
-        'is_active'
+        'dateofvote',
     ];
 
     /**
-     * The program that owns the organization.
-     */
-    public function program()
-    {
-        return $this->belongsTo(Program::class);
-    }
-
-    /**
-     * The candidates that belong to the organization.
+     * The programs that belong to the faculty.
      */
     public function candidates()
     {

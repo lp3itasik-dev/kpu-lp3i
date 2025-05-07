@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Candidate;
-use App\Models\CandidateDetail;
+use App\Models\Period;
 use Illuminate\Http\Request;
 
-class CandidateDetailController extends Controller
+class PeriodController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $periods = Period::all();
+        return view('periods.index')->with([
+            'periods' => $periods,
+        ]);
     }
 
     /**
@@ -21,10 +23,7 @@ class CandidateDetailController extends Controller
      */
     public function create()
     {
-        $candidates = Candidate::all();
-        return view('candidatedetails.create')->with([
-            'candidates' => $candidates,
-        ]);
+        return view('periods.create');
     }
 
     /**
@@ -33,18 +32,18 @@ class CandidateDetailController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'candidate_id' => 'required|exists:candidates,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'dateofvote' => 'required|date',
         ]);
 
-        CandidateDetail::create([
-            'candidate_id' => $request->candidate_id,
+        Period::create([
             'name' => $request->name,
             'description' => $request->description,
+            'dateofvote' => $request->dateofvote,
         ]);
 
-        return redirect()->route('candidates.index')->with('success', 'Candidate detail created successfully.');
+        return redirect()->route('periods.index')->with('success', 'Period created successfully.');
     }
 
     /**
@@ -60,11 +59,9 @@ class CandidateDetailController extends Controller
      */
     public function edit(string $id)
     {
-        $candidates = Candidate::all();
-        $candidatedetail = CandidateDetail::findOrFail($id);
-        return view('candidatedetails.edit')->with([
-            'candidatedetail' => $candidatedetail,
-            'candidates' => $candidates,
+        $period = Period::findOrFail($id);
+        return view('periods.edit')->with([
+            'period' => $period,
         ]);
     }
 
@@ -74,19 +71,19 @@ class CandidateDetailController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'candidate_id' => 'required|exists:candidates,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'dateofvote' => 'required|date',
         ]);
 
-        $candidatedetail = CandidateDetail::findOrFail($id);
-        $candidatedetail->update([
-            'candidate_id' => $request->candidate_id,
+        $period = Period::findOrFail($id);
+        $period->update([
             'name' => $request->name,
             'description' => $request->description,
+            'dateofvote' => $request->dateofvote,
         ]);
 
-        return redirect()->route('candidates.index')->with('success', 'Candidate detail updated successfully.');
+        return redirect()->route('periods.index')->with('success', 'Period updated successfully.');
     }
 
     /**
@@ -94,8 +91,9 @@ class CandidateDetailController extends Controller
      */
     public function destroy(string $id)
     {
-        $candidatedetail = CandidateDetail::findOrFail($id);
-        $candidatedetail->delete();
-        return redirect()->route('candidates.index')->with('success', 'Candidate detail deleted successfully.');
+        $period = Period::findOrFail($id);
+        $period->delete();
+
+        return redirect()->route('periods.index')->with('success', 'Period deleted successfully.');
     }
 }

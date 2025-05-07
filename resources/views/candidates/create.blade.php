@@ -11,6 +11,14 @@
             <form action="{{ route('candidates.store') }}" method="post">
                 @csrf
                 <div>
+                    <label for="period_id">Periods</label>
+                    <select name="period_id" id="period_id">
+                        @foreach ($periods as $period)
+                            <option value="{{ $period->id }}">{{ $period->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
                     <label for="organization_id">Organization</label>
                     <select name="organization_id" id="organization_id">
                         @foreach ($organizations as $organization)

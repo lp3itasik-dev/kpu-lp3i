@@ -47,4 +47,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * The organization that owns the user.
+     */
+    public function cardvotes()
+    {
+        return $this->hasMany(CardVote::class);
+    }
 }

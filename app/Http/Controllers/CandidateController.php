@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidate;
+use App\Models\CandidateDetail;
 use App\Models\Organization;
+use App\Models\Period;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller
@@ -13,7 +15,12 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $candidates = Candidate::with('organization')->get();
+        $candidates = Candidate::with([
+            'organization',
+            'organization.program',
+            'organization.program.faculty',
+            'period'
+        ])->get();
         return view('candidates.index')->with([
             'candidates' => $candidates,
         ]);
@@ -25,8 +32,10 @@ class CandidateController extends Controller
     public function create()
     {
         $organizations = Organization::all();
+        $periods = Period::all();
         return view('candidates.create')->with([
             'organizations' => $organizations,
+            'periods' => $periods,
         ]);
     }
 
@@ -36,6 +45,7 @@ class CandidateController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'period_id' => 'required|exists:periods,id',
             'organization_id' => 'required|exists:organizations,id',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -46,6 +56,7 @@ class CandidateController extends Controller
         ]);
 
         Candidate::create([
+            'period_id' => $request->period_id,
             'organization_id' => $request->organization_id,
             'name' => $request->name,
             'description' => $request->description,
@@ -64,7 +75,12 @@ class CandidateController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $candidate = Candidate::with('organization')->findOrFail($id);
+        $candidatedetails = CandidateDetail::where('candidate_id', $id)->get();
+        return view('candidates.show')->with([
+            'candidate' => $candidate,
+            'candidatedetails' => $candidatedetails,
+        ]);
     }
 
     /**
@@ -74,8 +90,10 @@ class CandidateController extends Controller
     {
         $candidate = Candidate::with('organization')->findOrFail($id);
         $organizations = Organization::all();
+        $periods = Period::all();
         return view('candidates.edit')->with([
             'candidate' => $candidate,
+            'periods' => $periods,
             'organizations' => $organizations,
         ]);
     }
@@ -86,6 +104,7 @@ class CandidateController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
+            'period_id' => 'required|exists:periods,id',
             'organization_id' => 'required|exists:organizations,id',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -97,6 +116,7 @@ class CandidateController extends Controller
 
         $candidate = Candidate::findOrFail($id);
         $candidate->update([
+            'period_id' => $request->period_id,
             'organization_id' => $request->organization_id,
             'name' => $request->name,
             'description' => $request->description,

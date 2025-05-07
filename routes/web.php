@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CandidateDetailController;
+use App\Http\Controllers\CardVoteController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
@@ -25,11 +27,13 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
+    Route::resource('periods', PeriodController::class);
     Route::resource('faculties', FacultyController::class);
     Route::resource('programs', ProgramController::class);
     Route::resource('organizations', OrganizationController::class);
     Route::resource('candidates', CandidateController::class);
     Route::resource('candidatedetails', CandidateDetailController::class);
+    Route::resource('cardvotes', CardVoteController::class);
 
 });
 

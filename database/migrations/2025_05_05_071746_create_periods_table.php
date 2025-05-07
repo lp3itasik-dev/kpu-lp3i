@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('candidates', function (Blueprint $table) {
+        Schema::create('periods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('period_id')->constrained()->onDelete('cascade');
-            $table->foreignId('organization_id')->constrained()->onDelete('cascade');
             $table->string('name')->unique();
             $table->string('description')->nullable();
-            $table->string('vision')->nullable();
-            $table->string('mision')->nullable();
-            $table->text('logo')->nullable();
-            $table->text('video')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->date('dateofvote')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('candidates');
+        Schema::dropIfExists('periods');
     }
 };

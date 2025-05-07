@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Period</th>
                         <th>Organization</th>
                         <th>Name</th>
                         <th>Description</th>
@@ -27,7 +28,8 @@
                     @forelse ($candidates as $key => $candidate)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $candidate->organization_id }}</td>
+                        <td>{{ $candidate->period->name ?? 'Unknown' }}</td>
+                        <td>{{ $candidate->organization->name ?? 'Unknown' }}</td>
                         <td>{{ $candidate->name }}</td>
                         <td>{{ $candidate->description }}</td>
                         <td>{{ $candidate->vision }}</td>
@@ -36,6 +38,7 @@
                         <td>{{ $candidate->video }}</td>
                         <td>{{ $candidate->is_active ? 'Active' : 'Non Active' }}</td>
                         <td>
+                            <a href="{{ route('candidates.show', $candidate->id) }}">Show</a>
                             <a href="{{ route('candidates.edit', $candidate->id) }}">Edit</a>
                             <form action="{{ route('candidates.destroy', $candidate->id) }}" method="POST" class="inline" onclick="return confirm('Are you sure you want to delete this item?');">
                                 @csrf
