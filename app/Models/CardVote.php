@@ -37,4 +37,9 @@ class CardVote extends Model
     {
         return $this->belongsTo(Organization::class);
     }
+
+    public function voting()
+    {
+        return $this->hasMany(Voting::class);
+    }
 }

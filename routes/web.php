@@ -9,6 +9,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VotingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('candidates', CandidateController::class);
     Route::resource('candidatedetails', CandidateDetailController::class);
     Route::resource('cardvotes', CardVoteController::class);
+    Route::resource('voting', VotingController::class);
 
 });
 

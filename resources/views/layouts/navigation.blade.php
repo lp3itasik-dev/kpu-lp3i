@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('voting.index')" :active="request()->routeIs([
+                        'voting.index',
+                        'voting.create',
+                        'voting.edit',
+                        'voting.show',
+                    ])">
+                        {{ __('Voting') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('cardvotes.index')" :active="request()->routeIs([
                         'cardvotes.index',
                         'cardvotes.create',
