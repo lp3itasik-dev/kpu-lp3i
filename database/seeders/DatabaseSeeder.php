@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             CandidateSeeder::class,
             CandidateDetailSeeder::class,
             CardVoteSeeder::class,
+            VotingSeeder::class,
         ]);
     }
 }

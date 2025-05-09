@@ -15,7 +15,7 @@ class VotingController extends Controller
      */
     public function index()
     {
-        $period = Period::firstOrFail();
+        $period = Period::orderByDesc('id')->firstOrFail();
 
         $cardvote = CardVote::with([
             'user',
@@ -101,7 +101,32 @@ class VotingController extends Controller
         $candidate = Candidate::findOrFail($request->candidate_id);
 
         if($candidate->organization->program_id) {
-            dd('orga');
+            if($cardvote->period_id == $candidate->period_id) {
+                $check_voting = Voting::with([
+                    'cardvote',
+                    'cardvote.period',
+                    'cardvote.user',
+                    'cardvote.organization',
+                    'candidate',
+                    'candidate.organization',
+                    'candidate.organization.program',
+                    'candidate.organization.program.faculty',
+                ])
+                ->whereHas('candidate', function ($query) use ($candidate) {
+                    $query->where([
+                        'organization_id' => $candidate->organization_id,
+                        'period_id' => $candidate->period_id,
+                    ]);
+                })->first();
+                if($check_voting){
+                    return redirect()->route('voting.index')->with('failed', 'You have already voted for this candidate.');
+                } else {
+                    Voting::create([
+                        'card_vote_id' => $request->card_vote_id,
+                        'candidate_id' => $request->candidate_id,
+                    ]);
+                }
+            }
         } else {
             if($cardvote->period_id == $candidate->period_id) {
                 $check_voting = Voting::with([
@@ -113,18 +138,28 @@ class VotingController extends Controller
                     'candidate.organization',
                     'candidate.organization.program',
                     'candidate.organization.program.faculty',
-                ])->whereHas('candidate', function ($query) use ($candidate) {
-                    $query->where('organization_id', $candidate->organization_id);
+                ])
+                ->where([
+                    'card_vote_id' => $request->card_vote_id,
+                ])
+                ->whereHas('candidate', function ($query) use ($candidate) {
+                    $query->where([
+                        'organization_id' => $candidate->organization_id,
+                        'period_id' => $candidate->period_id,
+                    ]);
                 })->first();
-                dd($check_voting);
-            } else {
-                dd('period beda');
+                if($check_voting){
+                    return redirect()->route('voting.index')->with('failed', 'You have already voted for this candidate.');
+                } else {
+                    Voting::create([
+                        'card_vote_id' => $request->card_vote_id,
+                        'candidate_id' => $request->candidate_id,
+                    ]);
+                }
             }
         }
 
-        dd('offset');
-
-        return redirect()->route('voting.index')->with('success', 'Vote successfully cast.');
+        return redirect()->route('voting.index')->with('success', 'Your vote has been successfully submitted.');
     }
 
     /**

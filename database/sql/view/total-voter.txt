@@ -1,0 +1,10 @@
+CREATE VIEW view_card_vote_totals_by_period_organization AS SELECT
+	card_votes.period_id,
+    periods.name as period_name,
+    card_votes.organization_id,
+    organizations.name as organization_name,
+    COUNT(*) as total_voter
+FROM card_votes
+JOIN organizations ON organizations.id = card_votes.organization_id
+JOIN periods ON periods.id = card_votes.period_id
+GROUP BY card_votes.period_id, periods.name, card_votes.organization_id, organizations.name;
