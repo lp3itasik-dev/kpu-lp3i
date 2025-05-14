@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\CardVotesImport;
 use App\Models\CardVote;
 use App\Models\Organization;
 use App\Models\Period;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CardVoteController extends Controller
 {
@@ -82,9 +84,7 @@ class CardVoteController extends Controller
             'organization_id' => 'required|exists:organizations,id',
         ]);
 
-        $file = $request->file('users');
-        $path = $file->store('temp');
-        
+        Excel::import(new CardVotesImport($request->period_id, $request->organization_id), $request->file('users'));
 
         return redirect()->route('cardvotes.index')->with('success', 'Card vote imported successfully.');
     }

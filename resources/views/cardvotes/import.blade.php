@@ -74,6 +74,8 @@
                 </div>
                 <button type="submit">Create</button>
             </form>
+            <a href="{{ asset('excel/kpu-lp3itasik-template-import-card-votes.xlsx') }}" download>Download Template</a>
+            <p>note: rekomendasi jangan lebih dari 500 data perorganisasi.</p>
         </div>
 
     </div>

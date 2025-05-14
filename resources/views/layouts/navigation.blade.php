@@ -25,7 +25,7 @@
                         {{ __('Voting') }}
                     </x-nav-link>
                     @endif
-                    @if (Auth::check() && in_array(Auth::user()->role, ['A','O']))
+                    @if (Auth::check() && in_array(Auth::user()->role, ['O']))
                         <x-nav-link :href="route('cardvotes.index')" :active="request()->routeIs([
                             'cardvotes.index',
                             'cardvotes.create',

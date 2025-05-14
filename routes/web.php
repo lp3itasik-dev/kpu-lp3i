@@ -34,9 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('periods', PeriodController::class)->middleware(RoleMiddleware::class.':O');
     Route::resource('candidates', CandidateController::class)->middleware(RoleMiddleware::class.':O');
     Route::resource('candidatedetails', CandidateDetailController::class)->middleware(RoleMiddleware::class.':O');
-    Route::post('cardvotes/importstore', [CardVoteController::class, 'import'])->middleware(RoleMiddleware::class.':A|O')->name('cardvotes.import_store');
-    Route::get('cardvotes/import', [CardVoteController::class, 'import'])->middleware(RoleMiddleware::class.':A|O')->name('cardvotes.import');
-    Route::resource('cardvotes', CardVoteController::class)->middleware(RoleMiddleware::class.':A|O');
+    Route::post('cardvotes/importstore', [CardVoteController::class, 'import_store'])->middleware(RoleMiddleware::class.':O')->name('cardvotes.import_store');
+    Route::get('cardvotes/import', [CardVoteController::class, 'import'])->middleware(RoleMiddleware::class.':O')->name('cardvotes.import');
+    Route::resource('cardvotes', CardVoteController::class)->middleware(RoleMiddleware::class.':O');
     Route::resource('voting', VotingController::class)->middleware(RoleMiddleware::class.':U');
 
 });
