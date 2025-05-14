@@ -41,31 +41,39 @@
             </div>
         @endif
 
-        <table class="max-w-7xl mx-auto">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Candidate</th>
-                    <th>Organization</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($voting as $key => $vote)
-                    <tr>
-                        <td>{{ $key + 1 }}</td>
-                        <td>{{ $vote->cardvote->period->description }}</td>
-                        <td>{{ $vote->candidate->name }}</td>
-                        <td>{{ $vote->candidate->organization->name }}</td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="3">Not found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-
+        @if (count($voting) > 0)
+            <div class="max-w-7xl mx-auto space-y-4 sm:px-6 lg:px-8">
+                <header>
+                    <h2>Anda sudah memilih!</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum dolorem saepe quia mollitia
+                        quisquam commodi, libero fugiat laudantium voluptas voluptatem.</p>
+                </header>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Candidate</th>
+                            <th>Organization</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($voting as $key => $vote)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $vote->cardvote->period->description }}</td>
+                                <td>{{ $vote->candidate->name }}</td>
+                                <td>{{ $vote->candidate->organization->name }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3">Not found.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        @endif
 
         @if (count($candidates_non_organization) > 0)
             <section class="max-w-7xl mx-auto space-y-4 sm:px-6 lg:px-8">
@@ -79,7 +87,12 @@
                         <form action="{{ route('voting.store') }}" method="POST"
                             class="bg-white shadow-md rounded-lg text-center space-y-1 p-4">
                             @csrf
-                            <div class="h-32 bg-gray-200"></div>
+                            @if ($candidate_non_organization->logo)
+                                <img src="{{ asset('storage/' . $candidate_non_organization->logo) }}" alt="Logo"
+                                    class="w-full h-52 object-cover">
+                            @else
+                                <div class="w-full h-52 bg-gray-200"></div>
+                            @endif
                             <h2 class="text-lg font-bold">{{ $candidate_non_organization->name }}</h2>
                             <h3 class="text-md font-medium">
                                 {{ $candidate_non_organization->organization->name ?? 'Unknown' }}</h3>
@@ -106,7 +119,12 @@
                         <form action="{{ route('voting.store') }}" method="POST"
                             class="bg-white shadow-md rounded-lg text-center space-y-1 p-4">
                             @csrf
-                            <div class="h-32 bg-gray-200"></div>
+                            @if ($candidate->logo)
+                                <img src="{{ asset('storage/' . $candidate->logo) }}" alt="Logo"
+                                    class="w-full h-52 object-cover">
+                            @else
+                                <div class="w-full h-52 bg-gray-200"></div>
+                            @endif
                             <h2 class="text-lg font-bold">{{ $candidate->name }}</h2>
                             <h3 class="text-md font-medium">{{ $candidate->organization->name ?? 'Unknown' }}</h3>
                             <p class="text-sm text-gray-700">{{ $candidate->description }}</p>

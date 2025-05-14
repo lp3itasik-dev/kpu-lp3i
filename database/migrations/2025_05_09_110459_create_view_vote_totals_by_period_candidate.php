@@ -13,7 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         DB::statement("
-            CREATE VIEW view_vote_totals_by_period_candidate AS SELECT
+            CREATE VIEW view_vote_totals_by_period_candidate AS
+            SELECT
                 candidates.period_id AS period_id,
                 periods.name AS period_name,
                 candidates.id AS candidate_id,
@@ -23,11 +24,14 @@ return new class extends Migration
                 candidates.vision AS candidate_vision,
                 organizations.id AS organization_id,
                 organizations.name AS organization_name,
+                programs.id AS program_id,
+                programs.name AS program_name,
                 COUNT(votings.id) AS total
             FROM candidates
             LEFT JOIN votings ON votings.candidate_id = candidates.id
             LEFT JOIN periods ON periods.id = candidates.period_id
             LEFT JOIN organizations ON organizations.id = candidates.organization_id
+            LEFT JOIN programs ON programs.id = organizations.program_id
             GROUP BY candidate_id, candidate_name, period_id, period_name;
         ");
     }

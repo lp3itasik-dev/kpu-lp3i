@@ -13,16 +13,34 @@
                 <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
                     deserunt cumque excepturi ex praesentium corrupti eveniet sed sint quibusdam reiciendis?</p>
             </header>
+            @php
+                $totalPemilih = App\Models\CardVote::where('period_id', $organization[0]['period_id'])
+                    ->where('organization_id', $organization[0]['organization_id'])
+                    ->count();
+                $totalYangMemilih = 0;
+            @endphp
             <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
                 @foreach ($organization as $candidate)
                     <div class="bg-white shadow-md rounded-lg text-center space-y-1 p-4">
-                        <div class="h-32 bg-gray-200"></div>
+                        @if ($candidate->candidate_logo)
+                            <img src="{{ asset('storage/' . $candidate->candidate_logo) }}" alt="Logo"
+                                class="w-full h-52 object-cover">
+                        @else
+                            <div class="w-full h-52 bg-gray-200"></div>
+                        @endif
                         <h2 class="text-lg font-bold">{{ $candidate->candidate_name }}</h2>
                         <h3 class="text-md font-medium">{{ $candidate->candidate_description }}</h3>
                         <p class="text-sm text-gray-700">{{ $candidate->total }}</p>
+                        @php
+                            $totalYangMemilih += $candidate->total;
+                        @endphp
                     </div>
                 @endforeach
             </div>
+            <footer>
+                <p>Total Yang Memilih: {{ $totalYangMemilih }}</p>
+                <p>Total Pemilih: {{ $totalPemilih }}</p>
+            </footer>
         </section>
         @endforeach
     </div>

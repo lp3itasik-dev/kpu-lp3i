@@ -40,7 +40,7 @@
         @endif
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <a href="{{ route('candidates.index') }}">Back</a>
-            <form action="{{ route('candidates.update', $candidate->id) }}" method="post">
+            <form action="{{ route('candidates.update', $candidate->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div>
@@ -87,7 +87,7 @@
                     @endif
                 </div>
                 <div>
-                    <label for="mision">Mission</label>
+                    <label for="mision">Mision</label>
                     <input type="text" name="mision" id="mision" value="{{ $candidate->mision }}" required>
                     @if ($errors->has('mision'))
                         <span class="text-red-500">{{ $errors->first('mision') }}</span>
@@ -95,14 +95,14 @@
                 </div>
                 <div>
                     <label for="logo">Logo</label>
-                    <input type="text" name="logo" id="logo" value="{{ $candidate->logo }}" required>
+                    <input type="file" name="logo" id="logo">
                     @if ($errors->has('logo'))
                         <span class="text-red-500">{{ $errors->first('logo') }}</span>
                     @endif
                 </div>
                 <div>
                     <label for="video">Video</label>
-                    <input type="text" name="video" id="video" value="{{ $candidate->video }}" required>
+                    <input type="text" name="video" id="video" value="{{ $candidate->video }}">
                     @if ($errors->has('video'))
                         <span class="text-red-500">{{ $errors->first('video') }}</span>
                     @endif

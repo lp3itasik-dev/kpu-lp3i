@@ -21,8 +21,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'AMIN adalah Anies Baswedan dan Muhaimin Iskandar',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -31,8 +29,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'PRAGIB adalah Prabowo Subianto dan Gibran Rakabuming Raka',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -41,8 +37,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'GANMAP adalah Ganjar Pranowo dan Mahfud MD',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],
             [
@@ -52,8 +46,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'AMIN adalah Anies Baswedan dan Muhaimin Iskandar',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -62,8 +54,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'PRAGIB adalah Prabowo Subianto dan Gibran Rakabuming Raka',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -72,8 +62,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'GANMAP adalah Ganjar Pranowo dan Mahfud MD',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -82,8 +70,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'AMIN adalah Anies Baswedan dan Muhaimin Iskandar',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -92,8 +78,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'PRAGIB adalah Prabowo Subianto dan Gibran Rakabuming Raka',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -102,8 +86,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'GANMAP adalah Ganjar Pranowo dan Mahfud MD',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -112,8 +94,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'AMIN adalah Anies Baswedan dan Muhaimin Iskandar',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -122,8 +102,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'PRAGIB adalah Prabowo Subianto dan Gibran Rakabuming Raka',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -132,8 +110,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'GANMAP adalah Ganjar Pranowo dan Mahfud MD',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -142,8 +118,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'AMIN adalah Anies Baswedan dan Muhaimin Iskandar',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -152,8 +126,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'PRAGIB adalah Prabowo Subianto dan Gibran Rakabuming Raka',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],[
                 'period_id' => 1,
@@ -162,8 +134,6 @@ class CandidateSeeder extends Seeder
                 'description' => 'GANMAP adalah Ganjar Pranowo dan Mahfud MD',
                 'vision' => 'Mewujudkan organisasi yang lebih baik',
                 'mision' => 'Meningkatkan kualitas organisasi',
-                'logo' => 'https://example.com/logo1.png',
-                'video' => 'https://example.com/video1.mp4',
                 'is_active' => true,
             ],
         ]);

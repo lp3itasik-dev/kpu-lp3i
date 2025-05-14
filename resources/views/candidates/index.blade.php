@@ -66,8 +66,20 @@
                         <td>{{ $candidate->description }}</td>
                         <td>{{ $candidate->vision }}</td>
                         <td>{{ $candidate->mision }}</td>
-                        <td>{{ $candidate->logo }}</td>
-                        <td>{{ $candidate->video }}</td>
+                        <td>
+                            @if ($candidate->logo)
+                                <img src="{{ asset('storage/' . $candidate->logo) }}" alt="Logo" class="w-20 h-20">
+                            @else
+                                No Logo
+                            @endif
+                        </td>
+                        <td>
+                            @if ($candidate->video)
+                                <a target="_blank" href="https://www.youtube.com/watch?v={{ $candidate->video }}">Look!</a>
+                            @else
+                                No Video
+                            @endif
+                        </td>
                         <td>{{ $candidate->is_active ? 'Active' : 'Non Active' }}</td>
                         <td>
                             <a href="{{ route('candidates.show', $candidate->id) }}">Show</a>
