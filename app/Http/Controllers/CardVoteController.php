@@ -42,6 +42,18 @@ class CardVoteController extends Controller
         ]);
     }
 
+    public function import()
+    {
+        $periods = Period::all();
+        $organizations = Organization::all();
+        $users = User::all();
+        return view('cardvotes.import')->with([
+            'periods' => $periods,
+            'organizations' => $organizations,
+            'users' => $users,
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -60,6 +72,21 @@ class CardVoteController extends Controller
         ]);
 
         return redirect()->route('cardvotes.index')->with('success', 'Card vote created successfully.');
+    }
+
+    public function import_store(Request $request)
+    {
+        $request->validate([
+            'period_id' => 'required|exists:periods,id',
+            'users' => 'required|file|mimes:xlsx,csv',
+            'organization_id' => 'required|exists:organizations,id',
+        ]);
+
+        $file = $request->file('users');
+        $path = $file->store('temp');
+        
+
+        return redirect()->route('cardvotes.index')->with('success', 'Card vote imported successfully.');
     }
 
     /**

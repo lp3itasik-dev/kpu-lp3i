@@ -18,10 +18,16 @@ return new class extends Migration
                 periods.name AS period_name,
                 candidates.id AS candidate_id,
                 candidates.name AS candidate_name,
+                candidates.logo AS candidate_logo,
+                candidates.description AS candidate_description,
+                candidates.vision AS candidate_vision,
+                organizations.id AS organization_id,
+                organizations.name AS organization_name,
                 COUNT(votings.id) AS total
             FROM candidates
             LEFT JOIN votings ON votings.candidate_id = candidates.id
             LEFT JOIN periods ON periods.id = candidates.period_id
+            LEFT JOIN organizations ON organizations.id = candidates.organization_id
             GROUP BY candidate_id, candidate_name, period_id, period_name;
         ");
     }

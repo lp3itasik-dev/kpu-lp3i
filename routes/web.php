@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VotingController;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,15 +27,17 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::resource('users', UserController::class);
-    Route::resource('periods', PeriodController::class);
-    Route::resource('faculties', FacultyController::class);
-    Route::resource('programs', ProgramController::class);
-    Route::resource('organizations', OrganizationController::class);
-    Route::resource('candidates', CandidateController::class);
-    Route::resource('candidatedetails', CandidateDetailController::class);
-    Route::resource('cardvotes', CardVoteController::class);
-    Route::resource('voting', VotingController::class);
+    Route::resource('users', UserController::class)->middleware(RoleMiddleware::class.':A');
+    Route::resource('faculties', FacultyController::class)->middleware(RoleMiddleware::class.':A');
+    Route::resource('programs', ProgramController::class)->middleware(RoleMiddleware::class.':A');
+    Route::resource('organizations', OrganizationController::class)->middleware(RoleMiddleware::class.':A');
+    Route::resource('periods', PeriodController::class)->middleware(RoleMiddleware::class.':O');
+    Route::resource('candidates', CandidateController::class)->middleware(RoleMiddleware::class.':O');
+    Route::resource('candidatedetails', CandidateDetailController::class)->middleware(RoleMiddleware::class.':O');
+    Route::post('cardvotes/importstore', [CardVoteController::class, 'import'])->middleware(RoleMiddleware::class.':A|O')->name('cardvotes.import_store');
+    Route::get('cardvotes/import', [CardVoteController::class, 'import'])->middleware(RoleMiddleware::class.':A|O')->name('cardvotes.import');
+    Route::resource('cardvotes', CardVoteController::class)->middleware(RoleMiddleware::class.':A|O');
+    Route::resource('voting', VotingController::class)->middleware(RoleMiddleware::class.':U');
 
 });
 

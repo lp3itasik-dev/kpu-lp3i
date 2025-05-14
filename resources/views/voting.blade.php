@@ -29,6 +29,18 @@
             </div>
         @endif
 
+
+        @if (session('error'))
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center p-4 mb-4 bg-red-500 text-white rounded-2xl">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div class="ml-3 text-sm font-reguler">
+                        {{ session('error') }}
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <table class="max-w-7xl mx-auto">
             <thead>
                 <tr>

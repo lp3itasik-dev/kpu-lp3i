@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create Card Vote') }}
+            {{ __('Import Card Vote') }}
         </h2>
     </x-slot>
 
@@ -38,9 +38,10 @@
                 </div>
             </div>
         @endif
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <a href="{{ route('cardvotes.index') }}">Back</a>
-            <form action="{{ route('cardvotes.store') }}" method="post">
+            <form action="{{ route('cardvotes.import_store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div>
                     <label for="period_id">Period</label>
@@ -54,14 +55,10 @@
                     @endif
                 </div>
                 <div>
-                    <label for="user_id">User</label>
-                    <select name="user_id" id="user_id">
-                        @foreach ($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('user_id'))
-                        <span class="text-red-500">{{ $errors->first('user_id') }}</span>
+                    <label for="users">Users</label>
+                    <input type="file" name="users" id="users" accept=".xlsx, .xls, .csv">
+                    @if ($errors->has('users'))
+                        <span class="text-red-500">{{ $errors->first('users') }}</span>
                     @endif
                 </div>
                 <div>
@@ -78,5 +75,6 @@
                 <button type="submit">Create</button>
             </form>
         </div>
+
     </div>
 </x-app-layout>

@@ -31,7 +31,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|string|in:A,O,U',
+            'is_active' => 'required|boolean',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -58,7 +74,24 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'role' => 'required|string|in:A,O,U',
+            'is_active' => 'required|boolean',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
 
     /**
