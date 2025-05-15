@@ -16,9 +16,10 @@
                 </header>
                 @php
                     if ($organization[0]['program_id'] !== null) {
-                        $totalPemilih = App\Models\CardVote::where('period_id', $organization[0]['period_id'])
-                            ->where('organization_id', $organization[0]['organization_id'])
-                            ->count();
+                        $totalPemilih = App\Models\CardVote::where([
+                            'period_id' => $organization[0]['period_id'],
+                            'organization_id' => $organization[0]['organization_id'],
+                        ])->count();
                     } else {
                         $totalPemilih = App\Models\CardVote::where([
                             'period_id' => $organization[0]['period_id'],
@@ -44,10 +45,11 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-center">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
                     <p>Total Pemilih: {{ $totalPemilih }}</p>
                     <p>Total Yang Memilih: {{ $totalYangMemilih }}</p>
                     <p>Total Belum Memilih: {{ $totalPemilih - $totalYangMemilih }}</p>
+                    <p>Persentase: {{ ($totalYangMemilih / $totalPemilih) * 100 }}%</p>
                 </div>
             </section>
         @endforeach
