@@ -15,12 +15,12 @@ use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('realcount');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/realcount', [DashboardController::class, 'realcount'])->middleware(['auth', 'verified'])->name('realcount');
+Route::get('/realcount', [DashboardController::class, 'realcount'])->name('realcount');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

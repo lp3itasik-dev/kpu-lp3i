@@ -18,11 +18,14 @@
                     candidates.forEach((candidate) => {
                         candidateContainer += `
                         <div class="bg-white shadow-md rounded-lg text-center space-y-1.5 p-4">
-                            <div class="w-full h-32 bg-gray-200"></div>
+                            <div class="w-full h-52 bg-gray-200 bg-contain bg-center bg-no-repeat rounded-xl shadow-md"
+     style="background-image: url('/storage/${candidate.candidate_logo}')">
+</div>
+
                             <h2 class="text-base font-bold">${candidate.candidate_name}</h2>
                             <h3 class="text-xs font-medium">${candidate.candidate_description}</h3>
                         </div>`;
-                        console.log(candidate);
+                        console.log(candidates);
                     });
 
                     container += `
