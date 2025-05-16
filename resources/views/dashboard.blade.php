@@ -32,7 +32,7 @@
                         <div class="bg-white shadow-md rounded-lg text-center space-y-1 p-4">
                             @if ($candidate->candidate_logo)
                                 <img src="{{ asset('storage/' . $candidate->candidate_logo) }}" alt="Logo"
-                                    class="w-full h-52 object-cover">
+                                    class="w-full h-52 object-contain">
                             @else
                                 <div class="w-full h-52 bg-gray-200"></div>
                             @endif
