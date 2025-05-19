@@ -1,6 +1,6 @@
 <x-realcount-layout>
     <div id="organizations"
-        class="bg-[url('/public/img/building.jpg')] bg-gray-600 bg-blend-multiply bg-repeat-y bg-cover bg-center bg-fixed">
+        class="bg-[url('/public/img/building.jpg')] bg-gray-800 bg-blend-multiply bg-repeat-y bg-cover bg-center bg-fixed">
     </div>
 
     <script>
@@ -35,10 +35,10 @@
                     <section class="max-w-7xl mx-auto space-y-4 sm:px-6 lg:px-8 h-screen flex flex-col justify-center gap-5">
                         <header class="max-w-lg mx-auto text-center space-y-1">
                             <h2 class="font-bold text-xl text-white mb-4">${candidates[0]['organization_name']} ${candidates[0]['period_name']}</h2>
-                            <p class="text-sm text-gray-50">BEM dan HIMA adalah dua pilar penting dalam kehidupan kemahasiswaan. BEM sebagai penggerak aspirasi dan representasi mahasiswa secara umum, sementara HIMA sebagai wadah pengembangan akademik dan kekeluargaan di tingkat program studi. Keduanya bersinergi, bergerak bersama dalam mewujudkan lingkungan kampus yang aktif, kritis, dan berdaya saing.</p>
+                            <p class="text-md text-gray-50">BEM dan HIMA adalah dua pilar penting dalam kehidupan kemahasiswaan. BEM sebagai penggerak aspirasi dan representasi mahasiswa secara umum, sementara HIMA sebagai wadah pengembangan akademik dan kekeluargaan di tingkat program studi. Keduanya bersinergi, bergerak bersama dalam mewujudkan lingkungan kampus yang aktif, kritis, dan berdaya saing.</p>
                         </header>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">${candidateContainer}</div>
-                        <div class="flex justify-center items-center gap-10">
+                        <div class="flex justify-center items-center gap-2">
                             <canvas class="candidate" id="chart-candidate-${candidates[0]['period_id']}-${candidates[0]['organization_id']}"></canvas>
                             <canvas class="voting" id="chart-${candidates[0]['period_id']}-${candidates[0]['organization_id']}"></canvas>
                         </div>
@@ -108,7 +108,7 @@
                                         color: 'white',
                                         font: {
                                             weight: 'bold',
-                                            size: 14
+                                            size: 12
                                         }
                                     }
                                 },
@@ -116,7 +116,7 @@
                                     bodyColor: 'white',
                                     bodyFont: {
                                         weight: 'bold',
-                                        size: 14
+                                        size: 12
                                     }
                                 }
                             }

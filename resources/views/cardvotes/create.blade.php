@@ -39,8 +39,8 @@
             </div>
         @endif
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <a href="{{ route('cardvotes.index') }}">Back</a>
-            <form action="{{ route('cardvotes.store') }}" method="post">
+            <a href="{{ route('cardvotes.index') }}" class="border-2 border-red-500 border-dashed px-4 py-2 hover:bg-red-50 text-red-500 rounded-xl">Back</a>
+            <form action="{{ route('cardvotes.store') }}" method="post" class="bg-white p-6 rounded-3xl shadow-xl">
                 @csrf
                 <div>
                     <label for="period_id">Period</label>
