@@ -112,6 +112,9 @@ class VotingController extends Controller
                     'candidate.organization.program',
                     'candidate.organization.program.faculty',
                 ])
+                ->where([
+                    'card_vote_id' => $request->card_vote_id,
+                ])
                 ->whereHas('candidate', function ($query) use ($candidate) {
                     $query->where([
                         'organization_id' => $candidate->organization_id,
