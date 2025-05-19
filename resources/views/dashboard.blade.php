@@ -11,8 +11,7 @@
                 <header class="max-w-lg mx-auto text-center space-y-1">
                     <h2 class="font-bold text-md">{{ $organization[0]['organization_name'] }}
                         {{ $organization[0]['period_name'] }}</h2>
-                    <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                        deserunt cumque excepturi ex praesentium corrupti eveniet sed sint quibusdam reiciendis?</p>
+                    <p class="text-sm text-gray-600 lg:mx-0 mx-5">BEM dan HIMA adalah dua pilar penting dalam kehidupan kemahasiswaan. BEM sebagai penggerak aspirasi dan representasi mahasiswa secara umum, sementara HIMA sebagai wadah pengembangan akademik dan kekeluargaan di tingkat program studi. Keduanya bersinergi, bergerak bersama dalam mewujudkan lingkungan kampus yang aktif, kritis, dan berdaya saing.</p>
                 </header>
                 @php
                     if ($organization[0]['program_id'] !== null) {
@@ -27,7 +26,7 @@
                     }
                     $totalYangMemilih = 0;
                 @endphp
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:mx-0 mx-5">
                     @foreach ($organization as $candidate)
                         <div class="bg-white shadow-md rounded-lg text-center space-y-1 p-4">
                             @if ($candidate->candidate_logo)

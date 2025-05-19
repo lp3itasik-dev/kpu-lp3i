@@ -39,13 +39,17 @@
             </div>
         @endif
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <a href="{{ route('cardvotes.index') }}">Back</a>
-            <form action="{{ route('cardvotes.update', $cardvote->id) }}" method="post">
+            <a href="{{ route('cardvotes.index') }}" class="hover:bg-amber-100 border border-amber-500 text-amber-500 px-4 py-2 rounded-3xl">Back</a>
+            <form action="{{ route('cardvotes.update', $cardvote->id) }}" method="post" class="bg-white p-6 rounded-3xl shadow-xl">
                 @csrf
                 @method('PATCH')
-                <div>
-                    <label for="period_id">Period</label>
-                    <select name="period_id" id="period_id">
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Period<span class="text-red-500">*</span></span>
+                    </div>
+                    <select
+                        class="js-example-placeholder-single js-states form-control w-full border border-gray-300 rounded-3xl px-4"
+                        name="period_id" id="period_id" data-placeholder="Period">
                         <option value="{{ $cardvote->period_id }}">{{ $cardvote->period->name }}</option>
                         @foreach ($periods as $period)
                             <option value="{{ $period->id }}">{{ $period->name }}</option>
@@ -55,9 +59,13 @@
                         <span class="text-red-500">{{ $errors->first('period_id') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="user_id">User</label>
-                    <select name="user_id" id="user_id">
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>User<span class="text-red-500">*</span></span>
+                    </div>
+                    <select
+                        class="js-example-placeholder-single js-states form-control w-full border border-gray-300 rounded-3xl px-4"
+                        name="period_id" id="period_id" data-placeholder="Period">
                         <option value="{{ $cardvote->user_id }}">{{ $cardvote->user->name }}</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -67,9 +75,13 @@
                         <span class="text-red-500">{{ $errors->first('user_id') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="organization_id">Organization</label>
-                    <select name="organization_id" id="organization_id">
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Organization<span class="text-red-500">*</span></span>
+                    </div>
+                    <select
+                        class="js-example-placeholder-single js-states form-control w-full border border-gray-300 rounded-3xl px-4"
+                        name="period_id" id="period_id" data-placeholder="Period">
                         <option value="{{ $cardvote->organization_id }}">{{ $cardvote->organization->name }}</option>
                         @foreach ($organizations as $organization)
                             <option value="{{ $organization->id }}">{{ $organization->name }}</option>
@@ -79,7 +91,8 @@
                         <span class="text-red-500">{{ $errors->first('organization_id') }}</span>
                     @endif
                 </div>
-                <button type="submit">Update</button>
+
+                <button type="submit" class="hover:bg-sky-100 px-4 py-2 border-2 border-sky-500 rounded-3xl text-sky-500">Update</button>
             </form>
         </div>
     </div>

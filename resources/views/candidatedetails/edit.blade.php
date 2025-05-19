@@ -38,37 +38,47 @@
                 </div>
             </div>
         @endif
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <a href="{{ route('candidates.index') }}">Back</a>
-            <form action="{{ route('candidatedetails.update', $candidatedetail->id) }}" method="post">
+        <div class="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8 space-y-6">
+            <a href="{{ route('candidates.index') }}" class="border-2 border-red-500 border-dashed px-4 py-2 hover:bg-red-50 text-red-500 rounded-xl">Back</a>
+            <form action="{{ route('candidatedetails.update', $candidatedetail->id) }}" method="post" class="bg-white p-6 rounded-3xl shadow-xl">
                 @csrf
                 @method('PATCH')
-                <div>
-                    <label for="candidate_id">Candidate</label>
-                    <select name="candidate_id" id="candidate_id">
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Candidate<span class="text-red-500">*</span></span>
+                    </div>
+                    <select
+                        class="js-example-placeholder-single js-states form-control w-full border border-gray-300 rounded-3xl px-4"
+                        name="candidate_id" id="candidate_id" data-placeholder="Candidate">
                         @foreach ($candidates as $candidate)
-                            <option value="{{ $candidate->id }}">{{ $candidate->name }} ({{ $candidate->period->name }})</option>
+                            <option value="{{ $candidate->id }}">{{ $candidate->name }} ({{ $candidate->period->name }})
+                            </option>
                         @endforeach
                     </select>
                     @if ($errors->has('candidate_id'))
                         <span class="text-red-500">{{ $errors->first('candidate_id') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="{{ $candidatedetail->name }}" required>
+
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Name<span class="text-red-500">*</span></span>
+                    </div>
+                    <input type="text" name="name" id="name" value="{{ $candidatedetail->name }}" class="w-full border border-gray-300 rounded-3xl px-4" required>
                     @if ($errors->has('name'))
                         <span class="text-red-500">{{ $errors->first('name') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="description">Description</label>
-                    <input type="text" name="description" id="description" value="{{ $candidatedetail->description }}" required>
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Description<span class="text-red-500">*</span></span>
+                    </div>
+                    <input type="text" name="description" id="description" value="{{ $candidatedetail->description }}" class="w-full border border-gray-300 rounded-3xl px-4" required>
                     @if ($errors->has('description'))
                         <span class="text-red-500">{{ $errors->first('description') }}</span>
                     @endif
                 </div>
-                <button type="submit">Update</button>
+                <button type="submit" class="hover:bg-sky-100 px-4 py-2 border-2 border-sky-500 rounded-3xl text-sky-500">Update</button>
             </form>
         </div>
     </div>

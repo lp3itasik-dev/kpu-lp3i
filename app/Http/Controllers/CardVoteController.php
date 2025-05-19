@@ -17,13 +17,26 @@ class CardVoteController extends Controller
      */
     public function index()
     {
-        $cardvotes = CardVote::with([
+        $page = request()->input('page', 1);
+        $entries = request()->input('entries', 10);
+        $search = request()->input('search');
+
+        $query = CardVote::with([
             'user',
             'period',
             'organization',
             'organization.program',
             'organization.program.faculty',
-        ])->get();
+        ]);
+
+        if ($search) {
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
+        $cardvotes = $query->paginate($entries);
+
         return view('cardvotes.index')->with([
             'cardvotes' => $cardvotes,
         ]);

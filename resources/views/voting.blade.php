@@ -9,7 +9,7 @@
 
         @if (session('success'))
             <div class="max-w-7xl mx-auto">
-                <div class="flex items-center p-4 mb-4 bg-emerald-500 text-white rounded-2xl">
+                <div class="flex items-center p-4 mb-4 bg-emerald-500 text-white rounded-2xl lg:mx-0 mx-5">
                     <i class="fa-solid fa-circle-check"></i>
                     <div class="ml-3 text-sm font-reguler">
                         {{ session('success') }}
@@ -20,7 +20,7 @@
 
         @if (session('failed'))
             <div class="max-w-7xl mx-auto">
-                <div class="flex items-center p-4 mb-4 bg-red-500 text-white rounded-2xl">
+                <div class="flex items-center p-4 mb-4 bg-red-500 text-white rounded-2xl lg:mx-0 mx-5">
                     <i class="fa-solid fa-circle-check"></i>
                     <div class="ml-3 text-sm font-reguler">
                         {{ session('failed') }}
@@ -32,7 +32,7 @@
 
         @if (session('error'))
             <div class="max-w-7xl mx-auto">
-                <div class="flex items-center p-4 mb-4 bg-red-500 text-white rounded-2xl">
+                <div class="flex items-center p-4 mb-4 bg-red-500 text-white rounded-2xl lg:mx-0 mx-5">
                     <i class="fa-solid fa-circle-check"></i>
                     <div class="ml-3 text-sm font-reguler">
                         {{ session('error') }}
@@ -44,34 +44,61 @@
         @if (count($voting) > 0)
             <div class="max-w-7xl mx-auto space-y-4 sm:px-6 lg:px-8">
                 <header>
-                    <h2>Anda sudah memilih!</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum dolorem saepe quia mollitia
-                        quisquam commodi, libero fugiat laudantium voluptas voluptatem.</p>
+                    <h2 class="bg-emerald-100 text-emerald-700 px-5 py-2 rounded-xl mb-2 text-center mx-5 lg:mx-0">✅
+                        Anda sudah memilih! Terima
+                        kasih sudah menggunakan hak suara Anda dalam pemilihan BEM dan HIMA. Pilihan Anda adalah
+                        kontribusi nyata untuk perubahan!</h2>
                 </header>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Candidate</th>
-                            <th>Organization</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($voting as $key => $vote)
+                <div class="text-center">
+                    <div class="font-bold">PEMILIHAN UMUM BEM DAN HIMA 2025</div>
+                    <p>Silahkan lihat Kandidat berikut dan keputusan anda</p>
+                </div>
+
+
+
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg lg:mx-0 mx-5">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border">
+                        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
                             <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $vote->cardvote->period->description }}</td>
-                                <td>{{ $vote->candidate->name }}</td>
-                                <td>{{ $vote->candidate->organization->name }}</td>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">
+                                    NO
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    NAME
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center">
+                                    CANDIDATE
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    ORGANIZATION
+                                </th>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3">Not found.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @forelse ($voting as $key => $vote)
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800 text-center">
+                                        {{ $key + 1 }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ $vote->cardvote->period->description }}
+                                    </td>
+                                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                                        {{ $vote->candidate->name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $vote->candidate->organization->name }}
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="px-6 py-4 bg-gray-50 dark:bg-gray-800">Not found.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         @endif
 
@@ -79,10 +106,10 @@
             <section class="max-w-7xl mx-auto space-y-4 sm:px-6 lg:px-8">
                 <header class="max-w-lg mx-auto text-center space-y-1">
                     <h2 class="font-bold text-md">Pemilihan Non Organization</h2>
-                    <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                        deserunt cumque excepturi ex praesentium corrupti eveniet sed sint quibusdam reiciendis?</p>
+                    <p class="text-sm text-gray-600 lg:mx-0 mx-5">Gunakan hak suaramu, karena satu suara menentukan arah perubahan!
+                        Mari bersama membangun organisasi mahasiswa yang lebih baik.</p>
                 </header>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:mx-0 mx-5">
                     @foreach ($candidates_non_organization as $candidate_non_organization)
                         <form action="{{ route('voting.store') }}" method="POST"
                             class="bg-white shadow-md rounded-lg text-center space-y-1 p-4">
@@ -111,10 +138,10 @@
             <section class="max-w-7xl mx-auto space-y-4 sm:px-6 lg:px-8">
                 <header class="max-w-lg mx-auto text-center space-y-1">
                     <h2 class="font-bold text-md">Pemilihan Organization</h2>
-                    <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                        deserunt cumque excepturi ex praesentium corrupti eveniet sed sint quibusdam reiciendis?</p>
+                    <p class="text-sm text-gray-600 lg:mx-0 mx-5">Gunakan hak suaramu, karena satu suara menentukan arah perubahan!
+                        Mari bersama membangun organisasi mahasiswa yang lebih baik.</p>
                 </header>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:mx-0 mx-5">
                     @foreach ($candidates as $candidate)
                         <form action="{{ route('voting.store') }}" method="POST"
                             class="bg-white shadow-md rounded-lg text-center space-y-1 p-4">

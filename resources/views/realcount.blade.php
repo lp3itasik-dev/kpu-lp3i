@@ -1,15 +1,13 @@
 <x-realcount-layout>
     <div id="organizations"
-        class="bg-[url('/public/img/building.jpg')] bg-gray-600 bg-blend-multiply bg-repeat-y bg-cover bg-center bg-fixed">
+        class="bg-[url('/public/img/building.jpg')] bg-gray-800 bg-blend-multiply bg-repeat-y bg-cover bg-center bg-fixed">
     </div>
 
     <script>
         async function getData() {
             try {
                 const response = await fetch('/api/dashboard');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                if (!response.ok) throw new Error('Network response was not ok');
 
                 const data = await response.json();
                 const organizations = data.vote_totals_by_period_candidate;
@@ -18,31 +16,43 @@
                 for (const [orgId, candidates] of Object.entries(organizations)) {
                     let candidateContainer = '';
 
-                    candidates.forEach((candidate) => {
+                    candidates.forEach(candidate => {
                         candidateContainer += `
-                        <div class="bg-white shadow-md rounded-lg text-center space-y-1.5 p-4">
-                            <div class="w-full h-52 bg-gray-200 bg-contain bg-center bg-no-repeat rounded-xl shadow-md"
-                                style="background-image: url('/storage/${candidate.candidate_logo}')">
-                            </div>
-
-                            <h2 class="text-base font-bold">${candidate.candidate_name}</h2>
-                            <h3 class="text-xs font-medium">${candidate.candidate_description}</h3>
-                        </div>`;
-                        console.log(candidates);
+                            <div class="bg-white shadow-md rounded-lg text-center space-y-1.5 p-4 lg:mx-0 mx-5">
+                                <div class="w-full h-52 bg-gray-200 bg-contain bg-center bg-no-repeat rounded-xl shadow-md"
+                                    style="background-image: url('/storage/${candidate.candidate_logo}')">
+                                </div>
+                                <h2 class="text-base font-bold">${candidate.candidate_name}</h2>
+                                <h3 class="text-xs font-medium">${candidate.candidate_description}</h3>
+                            </div>`;
                     });
 
                     container += `
-                    <section class="max-w-7xl mx-auto space-y-4 sm:px-6 lg:px-8 h-screen flex flex-col justify-center gap-5">
-                        <header class="max-w-lg mx-auto text-center space-y-1">
-                            <h2 class="font-bold text-xl text-white mb-4">${candidates[0]['organization_name']} ${candidates[0]['period_name']}</h2>
-                            <p class="text-sm text-gray-50">BEM dan HIMA adalah dua pilar penting dalam kehidupan kemahasiswaan. BEM sebagai penggerak aspirasi dan representasi mahasiswa secara umum, sementara HIMA sebagai wadah pengembangan akademik dan kekeluargaan di tingkat program studi. Keduanya bersinergi, bergerak bersama dalam mewujudkan lingkungan kampus yang aktif, kritis, dan berdaya saing.</p>
-                        </header>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">${candidateContainer}</div>
-                        <div class="flex justify-center items-center gap-10">
-                            <canvas class="candidate" id="chart-candidate-${candidates[0]['period_id']}-${candidates[0]['organization_id']}"></canvas>
-                            <canvas class="voting" id="chart-${candidates[0]['period_id']}-${candidates[0]['organization_id']}"></canvas>
-                        </div>
-                    </section>`;
+                        <section class="max-w-7xl mx-auto space-y-6 sm:px-6 lg:px-8 py-10">
+                            <header class="max-w-lg mx-auto text-center space-y-1">
+                                <h2 class="font-bold text-xl text-white mb-4">
+                                    ${candidates[0]['organization_name']} ${candidates[0]['period_name']}
+                                </h2>
+                                <p class="text-md text-gray-50 lg:mx-0 mx-5">
+                                    BEM dan HIMA adalah dua pilar penting dalam kehidupan kemahasiswaan. BEM sebagai penggerak aspirasi dan representasi mahasiswa secara umum, sementara HIMA sebagai wadah pengembangan akademik dan kekeluargaan di tingkat program studi. Keduanya bersinergi, bergerak bersama dalam mewujudkan lingkungan kampus yang aktif, kritis, dan berdaya saing.
+                                </p>
+                            </header>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">${candidateContainer}</div>
+
+                            <div class="flex flex-col lg:flex-row justify-center items-center gap-5 px-4">
+                                <div class="w-full sm:w-1/2 lg:w-1/3">
+                                    <div class="relative" style="height: 300px;">
+                                        <canvas id="chart-candidate-${candidates[0]['period_id']}-${candidates[0]['organization_id']}"></canvas>
+                                    </div>
+                                </div>
+                                <div class="w-full sm:w-1/2 lg:w-1/3">
+                                    <div class="relative" style="height: 300px;">
+                                        <canvas id="chart-${candidates[0]['period_id']}-${candidates[0]['organization_id']}"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>`;
                 }
 
                 document.getElementById('organizations').innerHTML = container;
@@ -52,6 +62,7 @@
                     let totalPemilih = 0;
                     let pemilih = [];
                     let candidateArray = [];
+
                     let urlCardVote = `/api/cardvote/${candidates[0]['period_id']}`;
                     if (candidates[0]['program_id'] !== null) {
                         urlCardVote += `/${candidates[0]['organization_id']}`;
@@ -66,19 +77,15 @@
                         console.error('Error fetching cardvote:', error);
                     }
 
-                    candidates.forEach((candidate) => {
+                    candidates.forEach(candidate => {
                         totalYangMemilih += candidate.total;
                         pemilih.push(candidate.total);
                         candidateArray.push(candidate.candidate_name);
                     });
 
-                    console.log(candidateArray);
-
                     const totalBelumMemilih = totalPemilih - totalYangMemilih;
-                    const persentase = totalPemilih > 0 ? ((totalYangMemilih / totalPemilih) * 100).toFixed() : '0.00';
 
-                    const canvasCandidateId =
-                        `chart-candidate-${candidates[0]['period_id']}-${candidates[0]['organization_id']}`;
+                    const canvasCandidateId = `chart-candidate-${candidates[0]['period_id']}-${candidates[0]['organization_id']}`;
                     const canvasId = `chart-${candidates[0]['period_id']}-${candidates[0]['organization_id']}`;
 
                     const ctxCandidate = document.getElementById(canvasCandidateId);
@@ -91,33 +98,24 @@
                             datasets: [{
                                 label: `Jumlah Pemilih`,
                                 data: pemilih,
-                                backgroundColor: [
-                                    '#4CAF50', // Hijau
-                                    '#2196F3', // Biru
-                                    '#FFC107', // Kuning
-                                    '#F44336', // Merah (opsional jika ada kandidat ke-4)
-                                ],
+                                backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#F44336'],
                                 borderColor: '#ffffff',
                                 borderWidth: 2
                             }]
                         },
                         options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
                             plugins: {
                                 legend: {
                                     labels: {
                                         color: 'white',
-                                        font: {
-                                            weight: 'bold',
-                                            size: 14
-                                        }
+                                        font: { weight: 'bold', size: 12 }
                                     }
                                 },
                                 tooltip: {
                                     bodyColor: 'white',
-                                    bodyFont: {
-                                        weight: 'bold',
-                                        size: 14
-                                    }
+                                    bodyFont: { weight: 'bold', size: 12 }
                                 }
                             }
                         }
@@ -129,67 +127,44 @@
                             labels: ['Total Pemilih', 'Yang Memilih', 'Belum Memilih'],
                             datasets: [{
                                 label: `Real Count ${candidates[0]['organization_name']} ${candidates[0]['period_name']}`,
-                                data: [totalPemilih, totalYangMemilih, totalBelumMemilih, ],
-                                backgroundColor: [
-                                    '#4CAF50', // Hijau
-                                    '#2196F3', // Biru
-                                    '#FFC107', // Kuning
-                                    '#F44336', // Merah (opsional jika ada kandidat ke-4)
-                                ],
+                                data: [totalPemilih, totalYangMemilih, totalBelumMemilih],
+                                backgroundColor: ['#4CAF50', '#2196F3', '#FFC107'],
                                 borderColor: '#ffffff',
                                 borderWidth: 2
                             }]
                         },
                         options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
                             plugins: {
                                 legend: {
                                     labels: {
                                         color: 'white',
-                                        font: {
-                                            weight: 'bold',
-                                            size: 14
-                                        }
+                                        font: { weight: 'bold', size: 14 }
                                     }
                                 },
                                 tooltip: {
                                     bodyColor: 'white',
-                                    bodyFont: {
-                                        weight: 'bold',
-                                        size: 14
-                                    }
+                                    bodyFont: { weight: 'bold', size: 14 }
                                 }
                             },
                             scales: {
                                 x: {
                                     ticks: {
                                         color: 'white',
-                                        font: {
-                                            weight: 'bold',
-                                            size: 14
-                                        }
+                                        font: { weight: 'bold', size: 14 }
                                     },
-                                    grid: {
-                                        color: 'white', // warna garis grid horizontal
-                                        borderColor: 'white' // warna garis tepi sumbu X
-                                    }
+                                    grid: { color: 'white', borderColor: 'white' }
                                 },
                                 y: {
                                     ticks: {
                                         color: 'white',
-                                        font: {
-                                            weight: 'bold',
-                                            size: 14
-                                        }
+                                        font: { weight: 'bold', size: 14 }
                                     },
-                                    grid: {
-                                        color: 'white', // warna garis grid vertikal
-                                        borderColor: 'white' // warna garis tepi sumbu Y
-                                    }
+                                    grid: { color: 'white', borderColor: 'white' }
                                 }
                             }
-
                         }
-
                     });
                 }
 
@@ -198,10 +173,7 @@
             }
         }
 
-        setInterval(() => {
-            getData();
-        }, 10000);
-
+        setInterval(() => getData(), 10000);
         getData();
     </script>
 </x-realcount-layout>

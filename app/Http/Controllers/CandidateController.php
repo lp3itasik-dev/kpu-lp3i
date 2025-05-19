@@ -14,12 +14,25 @@ class CandidateController extends Controller {
     */
 
     public function index() {
-        $candidates = Candidate::with( [
+        $page = request()->input('page', 1);
+        $entries = request()->input('entries', 10);
+        $search = request()->input('search');
+
+        $query = Candidate::with([
             'organization',
             'organization.program',
             'organization.program.faculty',
             'period'
-        ] )->get();
+        ]);
+
+        if ($search) {
+            $query->whereHas('organization', function ($q) use ($search) {
+                $q->where('program', 'like', '%' . $search . '%');
+            });
+        }
+
+        $candidates = $query->paginate($entries);
+
         return view( 'candidates.index' )->with( [
             'candidates' => $candidates,
         ] );

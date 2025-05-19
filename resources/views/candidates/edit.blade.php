@@ -38,14 +38,18 @@
                 </div>
             </div>
         @endif
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <a href="{{ route('candidates.index') }}">Back</a>
-            <form action="{{ route('candidates.update', $candidate->id) }}" method="post" enctype="multipart/form-data">
+        <div class="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8 space-y-6">
+            <a href="{{ route('candidates.index') }}" class="border-2 border-red-500 border-dashed px-4 py-2 hover:bg-red-50 text-red-500 rounded-xl">Back</a>
+            <form action="{{ route('candidates.update', $candidate->id) }}" method="post" enctype="multipart/form-data" class="bg-white p-6 rounded-3xl shadow-xl">
                 @csrf
                 @method('PATCH')
-                <div>
-                    <label for="period_id">Periods</label>
-                    <select name="period_id" id="period_id">
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Period<span class="text-red-500">*</span></span>
+                    </div>
+                    <select
+                        class="js-example-placeholder-single js-states form-control w-full border border-gray-300 rounded-3xl px-4"
+                        name="period_id" id="period_id" data-placeholder="Period">
                         @foreach ($periods as $period)
                             <option value="{{ $period->id }}">{{ $period->name }}</option>
                         @endforeach
@@ -54,9 +58,12 @@
                         <span class="text-red-500">{{ $errors->first('period_id') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="organization_id">Organization</label>
-                    <select name="organization_id" id="organization_id">
+
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Organization<span class="text-red-500">*</span></span>
+                    </div>
+                    <select name="organization_id" id="organization_id" class="js-example-placeholder-single js-states form-control w-full border border-gray-300 rounded-3xl px-4">
                         @foreach ($organizations as $organization)
                             <option value="{{ $organization->id }}">{{ $organization->name }}</option>
                         @endforeach
@@ -65,51 +72,65 @@
                         <span class="text-red-500">{{ $errors->first('organization_id') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="{{ $candidate->name }}" required>
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Name<span class="text-red-500">*</span></span>
+                    </div>
+                    <input type="text" name="name" id="name" value="{{ $candidate->name }}" class="w-full border border-gray-300 rounded-3xl px-4" required>
                     @if ($errors->has('name'))
                         <span class="text-red-500">{{ $errors->first('name') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="description">Description</label>
-                    <input type="text" name="description" id="description" value="{{ $candidate->description }}" required>
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Description<span class="text-red-500">*</span></span>
+                    </div>
+                    <input type="text" name="description" id="description" value="{{ $candidate->description }}" class="w-full border border-gray-300 rounded-3xl px-4" required>
                     @if ($errors->has('description'))
                         <span class="text-red-500">{{ $errors->first('description') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="vision">Vision</label>
-                    <input type="text" name="vision" id="vision" value="{{ $candidate->vision }}" required>
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Vision<span class="text-red-500">*</span></span>
+                    </div>
+                    <input type="text" name="vision" id="vision" value="{{ $candidate->vision }}" class="w-full border border-gray-300 rounded-3xl px-4" required>
                     @if ($errors->has('vision'))
                         <span class="text-red-500">{{ $errors->first('vision') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="mision">Mision</label>
-                    <input type="text" name="mision" id="mision" value="{{ $candidate->mision }}" required>
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Mision<span class="text-red-500">*</span></span>
+                    </div>
+                    <input type="text" name="mision" id="mision" value="{{ $candidate->mision }}" class="w-full border border-gray-300 rounded-3xl px-4" required>
                     @if ($errors->has('mision'))
                         <span class="text-red-500">{{ $errors->first('mision') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="logo">Logo</label>
-                    <input type="file" name="logo" id="logo">
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Logo<span class="text-red-500">*</span></span>
+                    </div>
+                    <input type="file" name="logo" id="logo" class="w-full border border-gray-300 rounded-3xl px-4 py-1">
                     @if ($errors->has('logo'))
                         <span class="text-red-500">{{ $errors->first('logo') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="video">Video</label>
-                    <input type="text" name="video" id="video" value="{{ $candidate->video }}">
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Video<span class="text-red-500">*</span></span>
+                    </div>
+                    <input type="text" name="video" id="video" value="{{ $candidate->video }}" class="w-full border border-gray-300 rounded-3xl px-4">
                     @if ($errors->has('video'))
                         <span class="text-red-500">{{ $errors->first('video') }}</span>
                     @endif
                 </div>
-                <div>
-                    <label for="is_active">Status</label>
-                    <select name="is_active" id="is_active">
+                <div class="mb-5">
+                    <div class="mb-2 text-md font-medium text-gray-900 dark:text-white flex items-center gap-3">
+                        <span>Status<span class="text-red-500">*</span></span>
+                    </div>
+                    <select name="is_active" id="is_active" class="js-example-placeholder-single js-states form-control w-full border border-gray-300 rounded-3xl px-4">
                         <option value="1" {{ $candidate->is_active ? 'selected' : '' }}>Active</option>
                         <option value="0" {{ !$candidate->is_active ? 'selected' : '' }}>Non Active</option>
                     </select>
@@ -117,7 +138,7 @@
                         <span class="text-red-500">{{ $errors->first('is_active') }}</span>
                     @endif
                 </div>
-                <button type="submit">Update</button>
+                <button type="submit" class="hover:bg-sky-100 px-4 py-2 border-2 border-sky-500 rounded-3xl text-sky-500">Update</button>
             </form>
         </div>
     </div>

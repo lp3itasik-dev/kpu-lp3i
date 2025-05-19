@@ -38,8 +38,10 @@
                 </div>
             </div>
         @endif
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <a href="{{ route('periods.create') }}">Create</a>
+        <div class="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8 space-y-6">
+            <div class="mt-4 w-32">
+                <a href="{{ route('periods.create') }}" class="href rounded-xl flex items-center justify-center  p-2 text-sm lg:text-md hover:bg-sky-100 border border-dashed border-sky-500 text-sky-500 pl-4 pr-4 pt-2">Create</a>
+            </div>
             <table>
                 <thead>
                     <tr>
