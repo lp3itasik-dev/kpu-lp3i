@@ -1,0 +1,17 @@
+{
+  "public/img/building.jpg": {
+    "file": "assets/building-B3ZNzX94.jpg",
+    "src": "public/img/building.jpg"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-cjwA1XsN.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Bf4POITK.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
