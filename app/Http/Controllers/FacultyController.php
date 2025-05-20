@@ -12,7 +12,19 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        $faculties = Faculty::all();
+
+        $page = request()->input('page', 1);
+        $entries = request()->input('entries', 10);
+        $search = request()->input('search');
+
+        $query = Faculty::query();
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        $faculties = $query->paginate($entries);
+
         return view('faculties.index')->with([
             'faculties' => $faculties,
         ]);
