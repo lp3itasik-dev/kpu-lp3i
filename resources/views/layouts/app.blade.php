@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Badan Eksekutif Mahasiswa</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url('img/kpu.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ url('img/kpu.png') }}">
+    <link rel="apple-touch-icon" href="{{ url('img/kpu.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

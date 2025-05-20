@@ -39,7 +39,7 @@
             </div>
         @endif
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8 space-y-6">
             <a href="{{ route('cardvotes.index') }}"
                 class="hover:bg-amber-100 border border-amber-500 text-amber-500 px-4 py-2 rounded-3xl">Back</a>
             <form action="{{ route('cardvotes.import_store') }}" method="post" enctype="multipart/form-data"
@@ -93,13 +93,13 @@
                 <button type="submit"
                     class="hover:bg-sky-100 px-4 py-2 border-2 border-sky-500 rounded-3xl text-sky-500">Create</button>
             </form>
-            <div class="flex gap-2 items-center">
+            <div class="flex flex-col lg:flex-row gap-2 items-center">
                 <div class="mt-4">
                     <a href="{{ asset('excel/kpu-lp3itasik-template-import-card-votes.xlsx') }}"
                         class="hover:bg-sky-100 px-4 py-2 border-2 border-sky-500 rounded-3xl text-sky-500"
                         download>Download Template</a>
                 </div>
-                <div class="font-bold mt-4"><span class="text-red-500">note:</span> rekomendasi jangan lebih dari 500 data
+                <div class="font-bold mt-4 text-center lg:text-left"><span class="text-red-500">note:</span> rekomendasi jangan lebih dari 500 data
                     perorganisasi.</div>
             </div>
         </div>

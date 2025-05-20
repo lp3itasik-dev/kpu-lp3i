@@ -38,7 +38,7 @@
                 </div>
             </div>
         @endif
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8 space-y-6">
             {{-- <a href="{{ route('cardvotes.create') }}">Create</a>
             <a href="{{ route('cardvotes.import') }}">Import</a> --}}
 
@@ -76,7 +76,7 @@
                     @endforelse
                 </tbody>
             </table> --}}
-            
+
             <div class="flex gap-5">
                 <div class="mt-4 w-32">
                     <a href="{{ route('cardvotes.create') }}"
@@ -164,7 +164,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" title="Hapus Data"
-                                                    class="border-2 border-dashed border-red-500 text-red-500 hover:bg-red-100 px-3 py-1 rounded-xl h-10 w-10 text-xs"><i
+                                                    class="mt-5 lg:mt-0 border-2 border-dashed border-red-500 text-red-500 hover:bg-red-100 px-3 py-1 rounded-xl h-10 w-10 text-xs"><i
                                                         class="fas fa-trash"></i></button>
                                             </form>
                                         </td>

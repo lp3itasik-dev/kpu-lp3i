@@ -38,7 +38,7 @@
                 </div>
             </div>
         @endif
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8 space-y-6">
             <a href="{{ route('cardvotes.index') }}" class="hover:bg-amber-100 border border-amber-500 text-amber-500 px-4 py-2 rounded-3xl">Back</a>
             <form action="{{ route('cardvotes.update', $cardvote->id) }}" method="post" class="bg-white p-6 rounded-3xl shadow-xl">
                 @csrf

@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{ url('img/logo.png') }}" alt="" srcset="" class="w-8">
+                        <img src="{{ url('img/dpm.png') }}" alt="" srcset="" class="w-10">
                     </a>
                 </div>
 
@@ -16,14 +16,9 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @if (Auth::check() && in_array(Auth::user()->role, ['U']))
-                    <x-nav-link :href="route('voting.index')" :active="request()->routeIs([
-                        'voting.index',
-                        'voting.create',
-                        'voting.edit',
-                        'voting.show'
-                    ])">
-                        {{ __('Voting') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('voting.index')" :active="request()->routeIs(['voting.index', 'voting.create', 'voting.edit', 'voting.show'])">
+                            {{ __('Voting') }}
+                        </x-nav-link>
                     @endif
                     @if (Auth::check() && in_array(Auth::user()->role, ['O']))
                         <x-nav-link :href="route('cardvotes.index')" :active="request()->routeIs([
@@ -37,59 +32,60 @@
                         </x-nav-link>
                     @endif
                     @if (Auth::check() && in_array(Auth::user()->role, ['O']))
-                    <x-nav-link :href="route('candidates.index')" :active="request()->routeIs([
-                        'candidates.index',
-                        'candidates.create',
-                        'candidates.edit',
-                        'candidates.show',
-                    ])">
-                        {{ __('Candidates') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('candidates.index')" :active="request()->routeIs([
+                            'candidates.index',
+                            'candidates.create',
+                            'candidates.edit',
+                            'candidates.show',
+                        ])">
+                            {{ __('Candidates') }}
+                        </x-nav-link>
                     @endif
                     @if (Auth::check() && in_array(Auth::user()->role, ['O']))
-                    <x-nav-link :href="route('periods.index')" :active="request()->routeIs([
-                        'periods.index',
-                        'periods.create',
-                        'periods.edit',
-                        'periods.show
-                    '])">
-                        {{ __('Periods') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('periods.index')" :active="request()->routeIs([
+                            'periods.index',
+                            'periods.create',
+                            'periods.edit',
+                            'periods.show
+                                                                                                                                                                                                                                                                                                                                                                                                                                            ',
+                        ])">
+                            {{ __('Periods') }}
+                        </x-nav-link>
                     @endif
                     @if (Auth::check() && in_array(Auth::user()->role, ['A']))
-                    <x-nav-link :href="route('programs.index')" :active="request()->routeIs([
-                        'programs.index',
-                        'programs.create',
-                        'programs.edit',
-                        'programs.show',
-                    ])">
-                        {{ __('Programs') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('programs.index')" :active="request()->routeIs([
+                            'programs.index',
+                            'programs.create',
+                            'programs.edit',
+                            'programs.show',
+                        ])">
+                            {{ __('Programs') }}
+                        </x-nav-link>
                     @endif
                     @if (Auth::check() && in_array(Auth::user()->role, ['A']))
-                    <x-nav-link :href="route('organizations.index')" :active="request()->routeIs([
-                        'organizations.index',
-                        'organizations.create',
-                        'organizations.edit',
-                        'organizations.show',
-                    ])">
-                        {{ __('Organizations') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('organizations.index')" :active="request()->routeIs([
+                            'organizations.index',
+                            'organizations.create',
+                            'organizations.edit',
+                            'organizations.show',
+                        ])">
+                            {{ __('Organizations') }}
+                        </x-nav-link>
                     @endif
                     @if (Auth::check() && in_array(Auth::user()->role, ['A']))
-                    <x-nav-link :href="route('faculties.index')" :active="request()->routeIs([
-                        'faculties.index',
-                        'faculties.create',
-                        'faculties.edit',
-                        'faculties.show',
-                    ])">
-                        {{ __('Faculties') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('faculties.index')" :active="request()->routeIs([
+                            'faculties.index',
+                            'faculties.create',
+                            'faculties.edit',
+                            'faculties.show',
+                        ])">
+                            {{ __('Faculties') }}
+                        </x-nav-link>
                     @endif
                     @if (Auth::check() && in_array(Auth::user()->role, ['A']))
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs(['users.index', 'users.create', 'users.edit', 'users.show'])">
-                        {{ __('Users') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs(['users.index', 'users.create', 'users.edit', 'users.show'])">
+                            {{ __('Users') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -114,9 +110,9 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        {{-- <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
-                        </x-dropdown-link>
+                        </x-dropdown-link> --}}
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -156,6 +152,97 @@
             </x-responsive-nav-link>
         </div>
 
+        @if (Auth::check() && in_array(Auth::user()->role, ['U']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('voting.index')" :active="request()->routeIs(['voting.index', 'voting.create', 'voting.edit', 'voting.show'])">
+                    {{ __('Voting') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if (Auth::check() && in_array(Auth::user()->role, ['O']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('cardvotes.index')" :active="request()->routeIs([
+                    'cardvotes.index',
+                    'cardvotes.create',
+                    'cardvotes.import',
+                    'cardvotes.edit',
+                    'cardvotes.show',
+                ])">
+                    {{ __('Voting') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if (Auth::check() && in_array(Auth::user()->role, ['O']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('candidates.index')" :active="request()->routeIs([
+                    'candidates.index',
+                    'candidates.create',
+                    'candidates.edit',
+                    'candidates.show',
+                ])">
+                    {{ __('Candidates') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if (Auth::check() && in_array(Auth::user()->role, ['O']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('periods.index')" :active="request()->routeIs([
+                    'periods.index',
+                    'periods.create',
+                    'periods.edit',
+                    'periods.show
+                                                                                                                                                                                                                                                                                                                                                                    ',
+                ])">
+                    {{ __('Periods') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if (Auth::check() && in_array(Auth::user()->role, ['A']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('programs.index')" :active="request()->routeIs(['programs.index', 'programs.create', 'programs.edit', 'programs.show'])">
+                    {{ __('Programs') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if (Auth::check() && in_array(Auth::user()->role, ['A']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('organizations.index')" :active="request()->routeIs([
+                    'organizations.index',
+                    'organizations.create',
+                    'organizations.edit',
+                    'organizations.show',
+                ])">
+                    {{ __('Organizations') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if (Auth::check() && in_array(Auth::user()->role, ['A']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('faculties.index')" :active="request()->routeIs([
+                    'faculties.index',
+                    'faculties.create',
+                    'faculties.edit',
+                    'faculties.show',
+                ])">
+                    {{ __('Faculties') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
+        @if (Auth::check() && in_array(Auth::user()->role, ['A']))
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs(['users.index', 'users.create', 'users.edit', 'users.show'])">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
+
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
@@ -164,9 +251,9 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
+                {{-- <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>
+                </x-responsive-nav-link> --}}
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
