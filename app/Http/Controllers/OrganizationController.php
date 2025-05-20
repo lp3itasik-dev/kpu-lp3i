@@ -13,7 +13,22 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        $organizations = Organization::with('program')->get();
+        $page = request()->input('page', 1);
+        $entries = request()->input('entries', 10);
+        $search = request()->input('search');
+
+        $query = Organization::with([
+            'program'
+        ]);
+
+        if ($search) {
+            $query->whereHas('program', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
+        $organizations = $query->paginate($entries);
+
         return view('organizations.index')->with([
             'organizations' => $organizations,
         ]);

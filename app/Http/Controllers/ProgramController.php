@@ -13,7 +13,22 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::with('faculty')->get();
+        $page = request()->input('page', 1);
+        $entries = request()->input('entries', 10);
+        $search = request()->input('search');
+
+        $query = Program::with([
+            'faculty'
+        ]);
+
+        if ($search) {
+            $query->whereHas('faculty', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
+        $programs = $query->paginate($entries);
+
         return view('programs.index')->with([
             'programs' => $programs
         ]);

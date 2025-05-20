@@ -44,7 +44,7 @@
                     class="href rounded-xl flex items-center justify-center  p-2 text-sm lg:text-md hover:bg-sky-100 border border-dashed border-sky-500 text-sky-500 pl-4 pr-4 pt-2">Create</a>
             </div>
 
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg lg:mx-0 mx-5">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border">
                     <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
                         <tr>
