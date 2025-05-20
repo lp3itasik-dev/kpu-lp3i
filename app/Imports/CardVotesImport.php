@@ -12,8 +12,7 @@ class CardVotesImport implements ToCollection, WithHeadingRow {
     protected $period_id;
     protected $organization_id;
 
-    public function __construct($period_id, $organization_id)
-    {
+    public function __construct( $period_id, $organization_id ) {
         $this->period_id = $period_id;
         $this->organization_id = $organization_id;
     }
@@ -21,11 +20,11 @@ class CardVotesImport implements ToCollection, WithHeadingRow {
     public function collection( Collection $rows ) {
         function createUser( $user ) {
             $user = User::updateOrCreate( [
-                'email' => $user['email'],
-            ],[
-                'name' => $user['name'],
-                'email' => $user['email'],
-                'password' => bcrypt( $user['password']),
+                'email' => $user[ 'email' ],
+            ], [
+                'name' => $user[ 'name' ],
+                'email' => $user[ 'email' ],
+                'password' => bcrypt( $user[ 'password' ] ),
                 'role' => 'U',
                 'is_active' => true,
             ] );
@@ -34,13 +33,20 @@ class CardVotesImport implements ToCollection, WithHeadingRow {
         }
 
         foreach ( $rows as $key => $row ) {
+            if ( empty( trim( $row[ 'email' ] ?? '' ) ) ) {
+                continue;
+            }
+            if ( empty( $row[ 'name' ] ) || empty( $row[ 'password' ] ) ) {
+                continue;
+            }
+            
             $user = createUser( $row );
 
             CardVote::updateOrCreate( [
                 'user_id' => $user->id,
                 'period_id' => $this->period_id,
                 'organization_id' => $this->organization_id,
-            ],[
+            ], [
                 'user_id' => $user->id,
                 'period_id' => $this->period_id,
                 'organization_id' => $this->organization_id,
