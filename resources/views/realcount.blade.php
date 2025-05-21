@@ -75,7 +75,7 @@
                                 </p>
                             </header>
 
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">${candidateContainer}</div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">${candidateContainer}</div>
 
                             <div class="flex flex-col lg:flex-row justify-center items-center gap-5 px-4">
                                 <div class="w-full sm:w-1/2 lg:w-1/3">
