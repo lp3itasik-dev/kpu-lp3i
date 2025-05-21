@@ -30,15 +30,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans text-gray-900 antialiased bg-[url('/public/img/gedung2.jpg')] bg-no-repeat bg-cover bg-gray-800 bg-blend-multiply">
     <div class="min-h-screen bg-gray-100">
         <!-- Page Content -->
         <main>
             <div id="organizations"
-                class="bg-[url('/public/img/building.jpg')] bg-gray-800 bg-blend-multiply bg-repeat-y bg-cover bg-center bg-fixed">
+                class="bg-[url('/public/img/gedung2.jpg')] bg-gray-800 bg-blend-multiply bg-repeat-y bg-cover bg-center bg-fixed">
             </div>
-
-            <script>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
                 async function getData() {
                     try {
                         const response = await fetch('/api/dashboard');
@@ -236,9 +238,6 @@
                 setInterval(() => getData(), 10000);
                 getData();
             </script>
-        </main>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>

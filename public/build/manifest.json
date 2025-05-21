@@ -1,10 +1,10 @@
 {
-  "public/img/building.jpg": {
-    "file": "assets/building-B3ZNzX94.jpg",
-    "src": "public/img/building.jpg"
+  "public/img/gedung2.jpg": {
+    "file": "assets/gedung2-CHNFfOLs.jpg",
+    "src": "public/img/gedung2.jpg"
   },
   "resources/css/app.css": {
-    "file": "assets/app-cjwA1XsN.css",
+    "file": "assets/app-DHRu7NyS.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
