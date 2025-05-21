@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('period_id')->constrained()->onDelete('cascade');
             $table->foreignId('organization_id')->constrained()->onDelete('cascade');
             $table->string('name')->unique();
-            $table->string('description')->nullable();
-            $table->string('vision')->nullable();
-            $table->string('mision')->nullable();
+            $table->text('description')->nullable();
+            $table->text('vision')->nullable();
+            $table->text('mision')->nullable();
             $table->text('logo')->nullable();
             $table->text('video')->nullable();
             $table->boolean('is_active')->default(true);

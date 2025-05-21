@@ -66,7 +66,7 @@
                     </div>
                     <select
                         class="js-example-placeholder-single js-states form-control w-full border border-gray-300 rounded-3xl px-4"
-                        name="period_id" id="period_id" data-placeholder="Period">
+                        name="organization_id" id="organization_id" data-placeholder="Organization">
                         <option value="">Pilih...</option>
                         @foreach ($organizations as $organization)
                             <option value="{{ $organization->id }}">{{ $organization->name }}</option>
