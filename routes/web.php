@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('cardvotes/importstore', [CardVoteController::class, 'import_store'])->middleware(RoleMiddleware::class.':O')->name('cardvotes.import_store');
     Route::get('cardvotes/import', [CardVoteController::class, 'import'])->middleware(RoleMiddleware::class.':O')->name('cardvotes.import');
     Route::resource('cardvotes', CardVoteController::class)->middleware(RoleMiddleware::class.':O');
-    Route::resource('voting', VotingController::class)->middleware(RoleMiddleware::class.':U');
+    Route::resource('voting', VotingController::class)->middleware(RoleMiddleware::class.':A');
 
 });
 
